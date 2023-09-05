@@ -54,3 +54,7 @@ Plugins/MyAndroidLocation/Binaries/*
 LocalSave/Save.txt
 .vsconfig
 .vs/
+
+*.tlog
+x64/
+MyNote/x64/
