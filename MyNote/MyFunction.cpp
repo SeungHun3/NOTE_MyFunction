@@ -1,5 +1,5 @@
 #include "MyFunction.h"
-
+#include <regex>
 
 bool MyFunction::isPrime(int n)
 {
@@ -28,6 +28,19 @@ string MyFunction::eraseStr(string origin, string checklist)
             result += origin[i];
         }
     }
+
+    return result;
+}
+
+string MyFunction::MyRegex_Replace(string origin,const string& checklist)
+{
+    string result = "";
+    string regexForm = "[]+";
+    if (!origin.empty())
+    {
+        regexForm.insert(1, checklist);
+    }
+    result = regex_replace(origin, regex(regexForm), "");
 
     return result;
 }

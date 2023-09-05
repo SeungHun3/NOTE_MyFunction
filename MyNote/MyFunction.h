@@ -9,6 +9,8 @@ class MyFunction
 public:
     //소수 인지 확인하는 함수
     bool isPrime(int n);
-
+    //string erase
     string eraseStr(string origin, string checklist);
+    //string regex_replace
+    string MyRegex_Replace(string origin,const string& checklist);
 };
