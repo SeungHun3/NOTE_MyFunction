@@ -9,7 +9,6 @@ int main() {
 
    
     MyFunction repo;
-    cout<<repo.eraseStr("answer","aeiou");
-
+    cout<<repo.eraseStr("nice to meet you","aeiou");
     return 0;
 }

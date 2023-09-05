@@ -12,15 +12,22 @@ bool MyFunction::isPrime(int n)
 
 string MyFunction::eraseStr(string origin, string checklist)
 {
-    for (int i = 0; i < origin.size(); i++)
-    {
-        for (int j = 0; j < checklist.size(); j++)
-        {
-            if (origin[i] == checklist[j])
-            {
-                origin.erase(i, 1);
+    string result = "";
+
+    for (int i = 0; i < origin.size(); i++) {
+        bool shouldErase = false;
+
+        for (int j = 0; j < checklist.size(); j++) {
+            if (origin[i] == checklist[j]) {
+                shouldErase = true;
+                break; // 이미 삭제해야 할 문자를 찾았으므로 내부 루프 종료
             }
         }
+
+        if (!shouldErase) {
+            result += origin[i];
+        }
     }
-    return origin;
+
+    return result;
 }
