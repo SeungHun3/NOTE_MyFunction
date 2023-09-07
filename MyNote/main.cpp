@@ -1,18 +1,22 @@
 #include <iostream>
-#include <vector>
 #include"MyFunction.h"
-#include <regex>
-using namespace std;
 
+using namespace std;
 
 int main() {
 
     MyFunction* repo = new MyFunction;
+    /*
+    string myStr = "";
+    std::vector<string>parseStr = repo->Parsing("3people unFollowed me");
+    for (auto it : parseStr)
+    {
+        myStr += repo->JadenCase(it);
+    }
+    cout << myStr;
+    */
 
-    string myOrigin = "nice to meet you";
-    string myCheck = "aeiou";
-    cout<<repo->MyRegex_Replace(myOrigin, myCheck);
-
+    repo->JadenCase("amGad");
     delete repo;
     return 0;
 }

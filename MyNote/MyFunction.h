@@ -1,6 +1,6 @@
 #pragma once
 #include<iostream>
-
+#include<vector>
 using namespace std;
 
 
@@ -13,4 +13,8 @@ public:
     string eraseStr(string origin, string checklist);
     //string regex_replace
     string MyRegex_Replace(string origin,const string& checklist);
+
+    string JadenCase(string str);
+    vector<string> Parsing(string str);
+
 };

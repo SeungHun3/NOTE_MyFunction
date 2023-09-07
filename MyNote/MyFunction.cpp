@@ -44,3 +44,53 @@ string MyFunction::MyRegex_Replace(string origin,const string& checklist)
 
     return result;
 }
+
+string MyFunction::JadenCase(string str)
+{
+    string input = str;
+    string result;
+    //아스키코드 a = 97 ~ z = 122, A = 65 ~ Z = 90 // 32차이
+    if (str.empty()) { return string(); }
+    
+    for (int i = 0; i < input.size(); i++) // 모두 소문자로 바꾼 후
+    {
+        if ((int)input[i] >= 65 && (int)input[i] <= 90)
+        {
+            char convert = static_cast<char>((int)input[i] + 32);
+            result += convert;
+        }
+        else
+        {
+            result += input[i];
+        }
+    }
+    if (((int)result[0] >= 97) && ((int)result[0] <= 122))
+    {
+        result[0] = static_cast<char>((int)result[0] - 32);
+    }
+    cout << result;
+    return result;
+}
+
+vector<string> MyFunction::Parsing(string str)
+{
+    vector<string> words;
+    string word = "";
+    // 문자열을 공백을 기준으로 단어로 나누기
+    for (char c : str) 
+    {
+        if (c != ' ') 
+        {
+            word += c;
+        }
+        else 
+        {
+            word += ' ';
+            words.push_back(word);
+            word = "";
+        }
+    }
+    words.push_back(word); // 마지막 단어 추가
+    
+    return words;
+}
