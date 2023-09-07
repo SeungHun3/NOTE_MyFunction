@@ -6,17 +6,13 @@ using namespace std;
 int main() {
 
     MyFunction* repo = new MyFunction;
-    /*
-    string myStr = "";
-    std::vector<string>parseStr = repo->Parsing("3people unFollowed me");
-    for (auto it : parseStr)
+    string mystr = "my teSt CASe";
+    string myResult = "";
+    for (auto it : repo->Parsing(mystr))
     {
-        myStr += repo->JadenCase(it);
+        myResult += repo->makeJaden(it);
     }
-    cout << myStr;
-    */
-
-    repo->JadenCase("amGad");
+    cout << myResult;
     delete repo;
     return 0;
 }

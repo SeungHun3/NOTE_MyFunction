@@ -94,3 +94,18 @@ vector<string> MyFunction::Parsing(string str)
     
     return words;
 }
+//toupper 대문자변환 ,  tolower 소문자변환
+string MyFunction::makeJaden(string str)
+{
+    if (str.empty()) { return string(); }
+    string input = str;
+    string result = "";
+
+    result += toupper(input[0]);
+    for (int i = 1; i < input.size(); i++) 
+    {
+        result += tolower(input[i]);
+    }
+
+    return result;
+}

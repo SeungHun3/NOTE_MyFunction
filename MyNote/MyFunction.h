@@ -17,4 +17,5 @@ public:
     string JadenCase(string str);
     vector<string> Parsing(string str);
 
+    string makeJaden(string str);
 };
