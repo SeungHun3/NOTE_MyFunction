@@ -1,6 +1,7 @@
 #pragma once
 #include<iostream>
 #include<vector>
+
 using namespace std;
 
 
@@ -18,4 +19,6 @@ public:
     vector<string> Parsing(string str);
 
     string makeJaden(string str);
+
+    bool queue_checkCorrect(string str);
 };

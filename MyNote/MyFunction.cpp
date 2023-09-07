@@ -1,6 +1,8 @@
 #include "MyFunction.h"
 #include <regex>
+#include <queue>
 
+using namespace std;
 bool MyFunction::isPrime(int n)
 {
     if (n < 2) return false;
@@ -108,4 +110,36 @@ string MyFunction::makeJaden(string str)
     }
 
     return result;
+}
+
+bool MyFunction::queue_checkCorrect(string str)
+{
+    queue<char> myqueue;
+    
+    for (auto it : str)
+    {
+        switch (it)
+        {
+        case '(':
+            myqueue.push('a');
+            break;
+
+        case ')':
+            if (myqueue.empty())
+            {
+                cout << "false";
+                return false;
+            }
+            myqueue.pop();
+            break;
+        }
+    }
+    if (myqueue.size() != 0)
+    {
+        return false;
+    }
+
+    return true;
+
+
 }
