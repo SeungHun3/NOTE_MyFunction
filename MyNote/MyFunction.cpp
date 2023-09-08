@@ -1,7 +1,7 @@
 #include "MyFunction.h"
 #include <regex>
 #include <queue>
-
+#include <algorithm>
 using namespace std;
 bool MyFunction::isPrime(int n)
 {
@@ -140,6 +140,73 @@ bool MyFunction::queue_checkCorrect(string str)
     }
 
     return true;
+
+
+}
+
+void MyFunction::MyForEachLoop(string str)
+{
+    for_each(str.begin(),str.end(), [&](char& a) 
+        {
+            cout << a;
+        });
+    cout << endl;
+}
+
+void MyFunction::MyLambda(string str)
+{
+    //사용법
+    /*
+
+    [=] () {} () // 모든 외부 변수 result1, result2, result3, result4를 복사해서 람다 함수 내부에서 사용
+    [&] () {} () // 모든 외부 변수 result1, result2, result3, result4 를 참조해서 람다 함수 내부에서 사용
+    [&, result3] () {} () // 모든 외부 변수 (result1,2,4)은 참조로 사용하지만, result3만 복사로 사용
+    [=, &result3] () {} () // 모든 외부 변수 (result1,2,4)은 복사로 사용하지만, result3만 참조로 사용
+
+    */
+
+
+    string mystring = str;
+
+    [mystring]()mutable { // 외부변수 받아와 값사용
+        mystring = "===";   // mutable 키워드로 수정할수 있게 열어줌
+        cout << mystring << endl; // 함수내에서 변경됨
+    }();
+    cout << mystring << endl; // 하지만 참조변수가 아닌 복사변수를 사용하므로 직접적인 값은 변경되지 않음 // 지역변수를 가져올때 주로 사용
+
+
+    [&]() {              // 모든 외부변수 참조값으로 받아와 값 변경
+        mystring = "aaa";
+
+    }();
+    cout << mystring << endl;
+
+
+    [&mystring]() { // 외부변수를 특정해 참조값으로 받아옴
+        mystring = "bbb";
+
+    }();
+    cout << mystring << endl;
+
+
+
+    [&, mystring]()mutable {    // 모든 외부변수를 참조로 가져옴, 외부변수를 지정해서 복사로 가져옴
+        mystring = "ccc";       // 이 경우 지정된 변수는 복사로 할당되니 mutable 키워드로 열어줌
+
+    }();
+    cout << mystring << endl; // 모든 외부변수가 참조형태로 들어왔으니 값은 변경됨 => 의도가 명확하지 않다면 잘 못 사용된 형태임
+
+    //==> 이렇게 사용하는 이유는 외부변수가 지역변수일때 참조한 메모리가 쓸모없어지게됨
+    // 결국 지정해서 값을 받아와 람다내에 저장 후 외부변수에 넘겨주는 형태로 가져가는게 사용 의도임
+
+
+
+
+    [=, &mystring]() {   // 모든 외부변수  복사로 받아옴, 외부변수 지정해 참조로 받아옴
+        mystring = "ddd";
+
+    }();
+    cout << mystring << endl; // 지정된 값이 참조형태이니 값이 변경됨
 
 
 }

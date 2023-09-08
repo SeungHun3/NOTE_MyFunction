@@ -21,4 +21,8 @@ public:
     string makeJaden(string str);
 
     bool queue_checkCorrect(string str);
+
+    void MyForEachLoop(string str);
+
+    void MyLambda(string str);
 };
