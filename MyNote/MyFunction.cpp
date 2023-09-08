@@ -2,7 +2,10 @@
 #include <regex>
 #include <queue>
 #include <algorithm>
+#include <map>
+
 using namespace std;
+
 bool MyFunction::isPrime(int n)
 {
     if (n < 2) return false;
@@ -243,6 +246,15 @@ vector<int> MyFunction::MyFibonacci(int count)
         unsigned int nextIndex = i + 1;
         var.push_back(var[i] + var[nextIndex]);
     }
-
     return var;
+}
+
+void MyFunction::MyMap(string key, int value)
+{
+    map<string, int> myMap;
+    for (int i = 0; i < value; i++)
+    {
+        myMap[key] = value;
+    }
+    cout << myMap.size(); // key와 value가 중복없이 설정
 }

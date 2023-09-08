@@ -30,4 +30,5 @@ public:
 
     vector<int> MyFibonacci(int count);
 
+    void MyMap(string key, int value);
 };

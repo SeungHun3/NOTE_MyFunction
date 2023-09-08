@@ -6,13 +6,7 @@ using namespace std;
 int main() {
 
     MyFunction* repo = new MyFunction;
-    int count = 10;
-    vector<int> fibonacci = repo->MyFibonacci(count);
-    for(auto it : fibonacci)
-    {
-        cout << it << endl;
-    }
-
+    repo->MyMap("Seunghun", 10);
     delete repo;
     return 0;
 }
