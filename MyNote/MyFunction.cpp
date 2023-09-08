@@ -230,3 +230,19 @@ int MyFunction::MakeDecimal(int var)
 
     return result;
 }
+
+vector<int> MyFunction::MyFibonacci(int count)
+{
+    vector<int> var;
+    var.push_back(0);
+    var.push_back(1);
+    if (count < 3) { return var; }
+    int myCount = count;
+    for (int i = 0; i < myCount-2; i++)
+    {
+        unsigned int nextIndex = i + 1;
+        var.push_back(var[i] + var[nextIndex]);
+    }
+
+    return var;
+}

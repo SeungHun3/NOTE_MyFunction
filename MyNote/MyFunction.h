@@ -27,4 +27,7 @@ public:
     void MyLambda(string str);
 
     int MakeDecimal(int var);
+
+    vector<int> MyFibonacci(int count);
+
 };
