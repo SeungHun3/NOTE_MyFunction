@@ -210,3 +210,23 @@ void MyFunction::MyLambda(string str)
 
 
 }
+
+int MyFunction::MakeDecimal(int var)
+{
+    int myValue = var;
+    if (myValue == 0)   {   return 0;}
+
+    string convert = "";
+
+    while (myValue >= 1)
+    {
+        int remainder = myValue % 2;
+        convert += to_string(remainder);
+        myValue /= 2;
+    }
+    
+    reverse(convert.begin(), convert.end());
+    int result = stoi(convert);
+
+    return result;
+}

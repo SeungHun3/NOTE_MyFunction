@@ -25,4 +25,6 @@ public:
     void MyForEachLoop(string str);
 
     void MyLambda(string str);
+
+    int MakeDecimal(int var);
 };
