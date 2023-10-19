@@ -14,8 +14,7 @@ public:
 
 	bool 전화번호목록(vector<string> phone_book);
 
-
-
-
+	int 의상(vector<vector<string>> clothes);
+	int 의상_다른사람풀이(vector<vector<string>> clothes);
 };
 
