@@ -1,4 +1,4 @@
-#include "MyFunction.h"
+ï»¿#include "MyFunction.h"
 #include <regex>
 #include <queue>
 #include <algorithm>
@@ -25,7 +25,7 @@ string MyFunction::eraseStr(string origin, string checklist)
         for (int j = 0; j < checklist.size(); j++) {
             if (origin[i] == checklist[j]) {
                 shouldErase = true;
-                break; // ÀÌ¹Ì »èÁ¦ÇØ¾ß ÇÒ ¹®ÀÚ¸¦ Ã£¾ÒÀ¸¹Ç·Î ³»ºÎ ·çÇÁ Á¾·á
+                break; // ì´ë¯¸ ì‚­ì œí•´ì•¼ í•  ë¬¸ìë¥¼ ì°¾ì•˜ìœ¼ë¯€ë¡œ ë‚´ë¶€ ë£¨í”„ ì¢…ë£Œ
             }
         }
 
@@ -54,10 +54,10 @@ string MyFunction::JadenCase(string str)
 {
     string input = str;
     string result;
-    //¾Æ½ºÅ°ÄÚµå a = 97 ~ z = 122, A = 65 ~ Z = 90 // 32Â÷ÀÌ
+    //ì•„ìŠ¤í‚¤ì½”ë“œ a = 97 ~ z = 122, A = 65 ~ Z = 90 // 32ì°¨ì´
     if (str.empty()) { return string(); }
     
-    for (int i = 0; i < input.size(); i++) // ¸ğµÎ ¼Ò¹®ÀÚ·Î ¹Ù²Û ÈÄ
+    for (int i = 0; i < input.size(); i++) // ëª¨ë‘ ì†Œë¬¸ìë¡œ ë°”ê¾¼ í›„
     {
         if ((int)input[i] >= 65 && (int)input[i] <= 90)
         {
@@ -81,7 +81,7 @@ vector<string> MyFunction::Parsing(string str)
 {
     vector<string> words;
     string word = "";
-    // ¹®ÀÚ¿­À» °ø¹éÀ» ±âÁØÀ¸·Î ´Ü¾î·Î ³ª´©±â
+    // ë¬¸ìì—´ì„ ê³µë°±ì„ ê¸°ì¤€ìœ¼ë¡œ ë‹¨ì–´ë¡œ ë‚˜ëˆ„ê¸°
     for (char c : str) 
     {
         if (c != ' ') 
@@ -95,11 +95,11 @@ vector<string> MyFunction::Parsing(string str)
             word = "";
         }
     }
-    words.push_back(word); // ¸¶Áö¸· ´Ü¾î Ãß°¡
+    words.push_back(word); // ë§ˆì§€ë§‰ ë‹¨ì–´ ì¶”ê°€
     
     return words;
 }
-//toupper ´ë¹®ÀÚº¯È¯ ,  tolower ¼Ò¹®ÀÚº¯È¯
+//toupper ëŒ€ë¬¸ìë³€í™˜ ,  tolower ì†Œë¬¸ìë³€í™˜
 string MyFunction::makeJaden(string str)
 {
     if (str.empty()) { return string(); }
@@ -158,34 +158,34 @@ void MyFunction::MyForEachLoop(string str)
 
 void MyFunction::MyLambda(string str)
 {
-    //»ç¿ë¹ı
+    //ì‚¬ìš©ë²•
     /*
 
-    [=] () {} () // ¸ğµç ¿ÜºÎ º¯¼ö result1, result2, result3, result4¸¦ º¹»çÇØ¼­ ¶÷´Ù ÇÔ¼ö ³»ºÎ¿¡¼­ »ç¿ë
-    [&] () {} () // ¸ğµç ¿ÜºÎ º¯¼ö result1, result2, result3, result4 ¸¦ ÂüÁ¶ÇØ¼­ ¶÷´Ù ÇÔ¼ö ³»ºÎ¿¡¼­ »ç¿ë
-    [&, result3] () {} () // ¸ğµç ¿ÜºÎ º¯¼ö (result1,2,4)Àº ÂüÁ¶·Î »ç¿ëÇÏÁö¸¸, result3¸¸ º¹»ç·Î »ç¿ë
-    [=, &result3] () {} () // ¸ğµç ¿ÜºÎ º¯¼ö (result1,2,4)Àº º¹»ç·Î »ç¿ëÇÏÁö¸¸, result3¸¸ ÂüÁ¶·Î »ç¿ë
+    [=] () {} () // ëª¨ë“  ì™¸ë¶€ ë³€ìˆ˜ result1, result2, result3, result4ë¥¼ ë³µì‚¬í•´ì„œ ëŒë‹¤ í•¨ìˆ˜ ë‚´ë¶€ì—ì„œ ì‚¬ìš©
+    [&] () {} () // ëª¨ë“  ì™¸ë¶€ ë³€ìˆ˜ result1, result2, result3, result4 ë¥¼ ì°¸ì¡°í•´ì„œ ëŒë‹¤ í•¨ìˆ˜ ë‚´ë¶€ì—ì„œ ì‚¬ìš©
+    [&, result3] () {} () // ëª¨ë“  ì™¸ë¶€ ë³€ìˆ˜ (result1,2,4)ì€ ì°¸ì¡°ë¡œ ì‚¬ìš©í•˜ì§€ë§Œ, result3ë§Œ ë³µì‚¬ë¡œ ì‚¬ìš©
+    [=, &result3] () {} () // ëª¨ë“  ì™¸ë¶€ ë³€ìˆ˜ (result1,2,4)ì€ ë³µì‚¬ë¡œ ì‚¬ìš©í•˜ì§€ë§Œ, result3ë§Œ ì°¸ì¡°ë¡œ ì‚¬ìš©
 
     */
 
 
     string mystring = str;
 
-    [mystring]()mutable { // ¿ÜºÎº¯¼ö ¹Ş¾Æ¿Í °ª»ç¿ë
-        mystring = "===";   // mutable Å°¿öµå·Î ¼öÁ¤ÇÒ¼ö ÀÖ°Ô ¿­¾îÁÜ
-        cout << mystring << endl; // ÇÔ¼ö³»¿¡¼­ º¯°æµÊ
+    [mystring]()mutable { // ì™¸ë¶€ë³€ìˆ˜ ë°›ì•„ì™€ ê°’ì‚¬ìš©
+        mystring = "===";   // mutable í‚¤ì›Œë“œë¡œ ìˆ˜ì •í• ìˆ˜ ìˆê²Œ ì—´ì–´ì¤Œ
+        cout << mystring << endl; // í•¨ìˆ˜ë‚´ì—ì„œ ë³€ê²½ë¨
     }();
-    cout << mystring << endl; // ÇÏÁö¸¸ ÂüÁ¶º¯¼ö°¡ ¾Æ´Ñ º¹»çº¯¼ö¸¦ »ç¿ëÇÏ¹Ç·Î Á÷Á¢ÀûÀÎ °ªÀº º¯°æµÇÁö ¾ÊÀ½ // Áö¿ªº¯¼ö¸¦ °¡Á®¿Ã¶§ ÁÖ·Î »ç¿ë
+    cout << mystring << endl; // í•˜ì§€ë§Œ ì°¸ì¡°ë³€ìˆ˜ê°€ ì•„ë‹Œ ë³µì‚¬ë³€ìˆ˜ë¥¼ ì‚¬ìš©í•˜ë¯€ë¡œ ì§ì ‘ì ì¸ ê°’ì€ ë³€ê²½ë˜ì§€ ì•ŠìŒ // ì§€ì—­ë³€ìˆ˜ë¥¼ ê°€ì ¸ì˜¬ë•Œ ì£¼ë¡œ ì‚¬ìš©
 
 
-    [&]() {              // ¸ğµç ¿ÜºÎº¯¼ö ÂüÁ¶°ªÀ¸·Î ¹Ş¾Æ¿Í °ª º¯°æ
+    [&]() {              // ëª¨ë“  ì™¸ë¶€ë³€ìˆ˜ ì°¸ì¡°ê°’ìœ¼ë¡œ ë°›ì•„ì™€ ê°’ ë³€ê²½
         mystring = "aaa";
 
     }();
     cout << mystring << endl;
 
 
-    [&mystring]() { // ¿ÜºÎº¯¼ö¸¦ Æ¯Á¤ÇØ ÂüÁ¶°ªÀ¸·Î ¹Ş¾Æ¿È
+    [&mystring]() { // ì™¸ë¶€ë³€ìˆ˜ë¥¼ íŠ¹ì •í•´ ì°¸ì¡°ê°’ìœ¼ë¡œ ë°›ì•„ì˜´
         mystring = "bbb";
 
     }();
@@ -193,23 +193,23 @@ void MyFunction::MyLambda(string str)
 
 
 
-    [&, mystring]()mutable {    // ¸ğµç ¿ÜºÎº¯¼ö¸¦ ÂüÁ¶·Î °¡Á®¿È, ¿ÜºÎº¯¼ö¸¦ ÁöÁ¤ÇØ¼­ º¹»ç·Î °¡Á®¿È
-        mystring = "ccc";       // ÀÌ °æ¿ì ÁöÁ¤µÈ º¯¼ö´Â º¹»ç·Î ÇÒ´çµÇ´Ï mutable Å°¿öµå·Î ¿­¾îÁÜ
+    [&, mystring]()mutable {    // ëª¨ë“  ì™¸ë¶€ë³€ìˆ˜ë¥¼ ì°¸ì¡°ë¡œ ê°€ì ¸ì˜´, ì™¸ë¶€ë³€ìˆ˜ë¥¼ ì§€ì •í•´ì„œ ë³µì‚¬ë¡œ ê°€ì ¸ì˜´
+        mystring = "ccc";       // ì´ ê²½ìš° ì§€ì •ëœ ë³€ìˆ˜ëŠ” ë³µì‚¬ë¡œ í• ë‹¹ë˜ë‹ˆ mutable í‚¤ì›Œë“œë¡œ ì—´ì–´ì¤Œ
 
     }();
-    cout << mystring << endl; // ¸ğµç ¿ÜºÎº¯¼ö°¡ ÂüÁ¶ÇüÅÂ·Î µé¾î¿ÔÀ¸´Ï °ªÀº º¯°æµÊ => ÀÇµµ°¡ ¸íÈ®ÇÏÁö ¾Ê´Ù¸é Àß ¸ø »ç¿ëµÈ ÇüÅÂÀÓ
+    cout << mystring << endl; // ëª¨ë“  ì™¸ë¶€ë³€ìˆ˜ê°€ ì°¸ì¡°í˜•íƒœë¡œ ë“¤ì–´ì™”ìœ¼ë‹ˆ ê°’ì€ ë³€ê²½ë¨ => ì˜ë„ê°€ ëª…í™•í•˜ì§€ ì•Šë‹¤ë©´ ì˜ ëª» ì‚¬ìš©ëœ í˜•íƒœì„
 
-    //==> ÀÌ·¸°Ô »ç¿ëÇÏ´Â ÀÌÀ¯´Â ¿ÜºÎº¯¼ö°¡ Áö¿ªº¯¼öÀÏ¶§ ÂüÁ¶ÇÑ ¸Ş¸ğ¸®°¡ ¾µ¸ğ¾ø¾îÁö°ÔµÊ
-    // °á±¹ ÁöÁ¤ÇØ¼­ °ªÀ» ¹Ş¾Æ¿Í ¶÷´Ù³»¿¡ ÀúÀå ÈÄ ¿ÜºÎº¯¼ö¿¡ ³Ñ°ÜÁÖ´Â ÇüÅÂ·Î °¡Á®°¡´Â°Ô »ç¿ë ÀÇµµÀÓ
-
-
+    //==> ì´ë ‡ê²Œ ì‚¬ìš©í•˜ëŠ” ì´ìœ ëŠ” ì™¸ë¶€ë³€ìˆ˜ê°€ ì§€ì—­ë³€ìˆ˜ì¼ë•Œ ì°¸ì¡°í•œ ë©”ëª¨ë¦¬ê°€ ì“¸ëª¨ì—†ì–´ì§€ê²Œë¨
+    // ê²°êµ­ ì§€ì •í•´ì„œ ê°’ì„ ë°›ì•„ì™€ ëŒë‹¤ë‚´ì— ì €ì¥ í›„ ì™¸ë¶€ë³€ìˆ˜ì— ë„˜ê²¨ì£¼ëŠ” í˜•íƒœë¡œ ê°€ì ¸ê°€ëŠ”ê²Œ ì‚¬ìš© ì˜ë„ì„
 
 
-    [=, &mystring]() {   // ¸ğµç ¿ÜºÎº¯¼ö  º¹»ç·Î ¹Ş¾Æ¿È, ¿ÜºÎº¯¼ö ÁöÁ¤ÇØ ÂüÁ¶·Î ¹Ş¾Æ¿È
+
+
+    [=, &mystring]() {   // ëª¨ë“  ì™¸ë¶€ë³€ìˆ˜  ë³µì‚¬ë¡œ ë°›ì•„ì˜´, ì™¸ë¶€ë³€ìˆ˜ ì§€ì •í•´ ì°¸ì¡°ë¡œ ë°›ì•„ì˜´
         mystring = "ddd";
 
     }();
-    cout << mystring << endl; // ÁöÁ¤µÈ °ªÀÌ ÂüÁ¶ÇüÅÂÀÌ´Ï °ªÀÌ º¯°æµÊ
+    cout << mystring << endl; // ì§€ì •ëœ ê°’ì´ ì°¸ì¡°í˜•íƒœì´ë‹ˆ ê°’ì´ ë³€ê²½ë¨
 
 
 }
@@ -256,5 +256,85 @@ void MyFunction::MyMap(string key, int value)
     {
         myMap[key] = value;
     }
-    cout << myMap.size(); // key¿Í value°¡ Áßº¹¾øÀÌ ¼³Á¤
+    cout << myMap.size(); // keyì™€ valueê°€ ì¤‘ë³µì—†ì´ ì„¤ì •
+}
+
+
+#include<bitset>
+
+char MyFunction::bitsToChar(const std::string& bitString)
+{
+
+
+    // ë™ì ìœ¼ë¡œ std::bitset ìƒì„±
+    std::bitset<64> mybitset(bitString); // ì—¬ê¸°ì—ì„œ 64ëŠ” ì„ì˜ì˜ ì¶©ë¶„íˆ í° ê°’
+
+    // ì´ì§„ìˆ˜ë¥¼ ì •ìˆ˜ë¡œ ë³€í™˜
+    int value = mybitset.to_ulong();
+    // 64ê°œì˜ ë¹„íŠ¸ë¥¼ ìŠ¤íŠ¸ë§ìœ¼ë¡œ í‘œí˜„
+    string str = mybitset.to_string();
+
+    // ì •ìˆ˜ë¥¼ ë¬¸ìë¡œ ë³€í™˜
+    return static_cast<char>('A' + value);
+
+    // bitset ì‚¬ìš©ë²•
+    {
+        int iBit = 0b1011;
+
+        std::bitset<64> imybitset(iBit);
+        int iValue = imybitset.to_ulong();
+        string strValue = imybitset.to_string();
+
+    }
+    
+    {
+        string strBit = "01111";
+
+        std::bitset<64> str_mybitset(strBit);
+        int iTemp = str_mybitset.to_ulong();
+        string strTemp = str_mybitset.to_string();
+    }
+
+    //bit set  ëª¨ë“  í•¨ìˆ˜
+    {
+        string strBit = "01111";
+
+        std::bitset<64> str_mybitset(strBit);
+        //Â bitsetì„Â ì„ ì–¸,Â ì´Â 64ê°œì˜Â ë¹„íŠ¸ë¥¼Â ì˜ë¯¸í•œë‹¤.Â 
+        //Â ì „ì²´Â ë¹„íŠ¸ë¥¼Â 0ìœ¼ë¡œÂ ë¦¬ì…‹í•œë‹¤.Â Â Â Â 
+        str_mybitset.reset();
+        //Â ì „ì²´Â ë¹„íŠ¸ë¥¼Â 1ë¡œÂ ì…‹íŒ…í•œë‹¤.Â Â Â Â 
+        str_mybitset.set();
+        //Â ë¹„íŠ¸ì…‹ìœ¼ë¡œÂ ì„ ì–¸í•œÂ bitì˜Â í• ë‹¹ëœÂ ìˆ˜ë¥¼Â êµ¬í•œë‹¤Â Â Â Â 
+        int mysize;
+        mysize = (int)str_mybitset.size();
+        //Â ë¹„íŠ¸ì…‹ì¤‘Â í•˜ë‚˜ë¼ë„Â 1ì´ë©´Â 1ì„Â ë°˜í™˜,Â ëª¨ë‘Â 0ì´ë©´Â 0ì„Â ë°˜í™˜í•œë‹¤.Â Â Â Â 
+        //Â í˜„ì¬ëŠ”Â bit.set()ë¡œÂ ì¸í•´Â ëª¨ë‘Â 1ì´ë‹¤.Â Â Â 
+        //Â 0ìœ¼ë¡œÂ ë¦¬ì…‹Â Â Â Â 
+        str_mybitset.reset();
+        //Â í˜„ì¬ëŠ”Â 0ìœ¼ë¡œÂ ëª¨ë‘Â ë¦¬ì…‹ì´Â ë˜ì—ˆìœ¼ë‹ˆÂ 0ì´Â ì¶œë ¥ëœë‹¤.Â Â Â 
+        //Â 4ë²ˆì§¸Â ë¹„íŠ¸Â ë°˜ì „Â Â Â 
+        str_mybitset.flip(3);
+        //Â í•˜ë‚˜ë¼ë„Â 1ì´ë©´Â bit.any()ëŠ”Â 1ì´ë˜ë‹ˆÂ bit.none()ëŠ”Â 0ì´ëœë‹¤.Â 
+        //Â í˜„ì¬Â ë¹„íŠ¸Â êµ¬ì„±Â í™•ì¸Â Â Â Â 
+        //Â ì²«ë²ˆì§¸Â ë¹„íŠ¸ëŠ”Â true,Â ë„¤ë²ˆì§¸Â ë¹„íŠ¸ëŠ”Â falseÂ í• ë‹¹Â Â Â Â 
+        str_mybitset.set(0, true);
+        str_mybitset.set(3, false);
+        //Â ì²«ë²ˆì§¸Â ë¹„íŠ¸Â ê²€ì‚¬Â Â Â Â 
+        str_mybitset.test(0);
+        //Â ë‹¤ì„¯ë²ˆì§¸Â ë¹„íŠ¸Â ê²€ì‚¬(ë°°ì—´í˜•ì‹ìœ¼ë¡œë„Â ê°€ëŠ¥í•˜ë‹¤.)Â Â Â Â 
+        str_mybitset[4];
+        //Â í˜„ì¬Â ë¹„íŠ¸Â ì¶œë ¥Â Â Â Â 
+        str_mybitset;
+        //Â ëª¨ë“ Â ë¹„íŠ¸Â ë°˜ì „Â Â Â Â 
+        str_mybitset.flip();
+        //Â ë¹„íŠ¸ë¥¼Â stringìœ¼ë¡œÂ ë³€í™˜Â Â Â Â 
+        string str = str_mybitset.to_string();
+        //Â ë¹„íŠ¸ë¥¼Â ìˆ«ìë¡œÂ ë³€í™˜Â Â Â Â 
+        str_mybitset.to_ulong();
+
+    }
+
+
+
 }

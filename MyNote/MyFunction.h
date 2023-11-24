@@ -32,4 +32,7 @@ public:
 
     void MyMap(string key, int value);
 
+    // string bitString = "010001";
+    char bitsToChar(const std::string& bitString);
+
 };
