@@ -467,3 +467,67 @@ vector<int> programmers::이중우선순위큐(vector<string> operations)
     answer.push_back(queue.front());
     return answer;
 }
+
+vector<int> programmers::k번째수(vector<int> array, vector<vector<int>> commands)
+{
+    vector<int> answer;
+    while (!commands.empty())
+    {
+        vector<int>command = commands.front();
+        commands.erase(commands.begin());
+        vector<int> trimArray;
+        for (int firstIdx = command[0] - 1; firstIdx < command[1]; firstIdx++)
+        {
+            trimArray.push_back(array[firstIdx]);
+        }
+
+        sort(trimArray.begin(), trimArray.end());
+        answer.push_back(trimArray[command[2] - 1]);
+
+    }
+    return answer;
+}
+
+
+bool cmp(const string& a, const string& b) {
+    if (a + b > b + a)
+        return true;
+    else
+        return false;
+}
+string programmers::가장큰수(vector<int> numbers)
+{
+    string answer = "";
+    vector<string> strArr;
+
+    for (int i = 0; i < numbers.size(); i++)
+    {
+        strArr.push_back(to_string(numbers.at(i)));
+    }
+
+    sort(strArr.begin(), strArr.end(), cmp);
+
+    for (string str : strArr)
+    {
+        answer += str;
+    }
+
+    if (answer[0] == '0')
+        return "0";
+
+    return answer;
+}
+
+int programmers::h_index(vector<int> citations)
+{
+    int answer = 0;
+    sort(citations.begin(), citations.end(), greater<>());
+
+    for (int i = 0; i < citations.size(); i++) {
+        if (citations[i] >= i + 1) {
+            answer = i + 1;
+        }
+    }
+
+    return answer;
+}

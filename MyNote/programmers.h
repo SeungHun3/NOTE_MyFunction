@@ -27,5 +27,10 @@ public:
 	// 힙
 	int 더맵게(vector<int> scoville, int K);
 	vector<int> 이중우선순위큐(vector<string> operations);
+
+	// 정렬
+	vector<int> k번째수(vector<int> array, vector<vector<int>> commands);
+	string 가장큰수(vector<int> numbers);
+	int h_index(vector<int> citations);
 };
 
