@@ -4,6 +4,7 @@
 #include <unordered_set>
 #include <map>
 #include <algorithm>
+#include <queue>
 using namespace std;
 
 int programmers::폰켓몬(vector<int> nums)
@@ -386,5 +387,83 @@ vector<int> programmers::주식가격(vector<int> prices)
         answer.push_back(time);
     }
 
+    return answer;
+}
+
+int programmers::더맵게(vector<int> scoville, int K)
+{
+    int answer = 0;
+    priority_queue<int, vector<int>, greater<int> > scv(scoville.begin(), scoville.end());
+
+    while (true)
+    {
+        // 모든 음식의 스코빌지수 k 이상 만들 수 없을때
+        if (scv.size() <= 1 && scv.top() < K)
+        {
+            return -1;
+        }
+        if (scv.top() >= K)
+            break;
+
+        int first = scv.top();
+        scv.pop();
+        int second = scv.top();
+        scv.pop();
+        int shakeScv = first + (second * 2);
+
+        scv.push(shakeScv);
+        answer++;
+
+    }
+    return answer;
+}
+
+vector<int> programmers::이중우선순위큐(vector<string> operations)
+{
+    vector<int> answer;
+    list<int> queue;
+    while (!operations.empty())
+    {
+        string str = operations[0];
+        operations.erase(operations.begin());
+        // 삽입
+        if (str[0] == 'I')
+        {
+            string substr = str.substr(2, str.size() - 2);
+            int push = stoi(substr);
+            queue.push_back(push);
+        }
+
+        //삭제
+        else if (str[0] == 'D')
+        {
+            if (queue.empty())
+                continue;
+
+            string substr = str.substr(2, str.size() - 2);
+            int push = stoi(substr);
+            if (push > 0)
+            {
+                //최대값 삭제
+                list<int>::iterator MaxIter = max_element(queue.begin(), queue.end());
+                queue.erase(MaxIter);
+            }
+            else
+            {
+                // 최소값 삭제
+                list<int>::iterator MinIter = min_element(queue.begin(), queue.end());
+                queue.erase(MinIter);
+            }
+        }
+    }
+    if (queue.empty())
+    {
+        answer.push_back(0);
+        answer.push_back(0);
+        return answer;
+    }
+    queue.sort();
+    answer.push_back(queue.back());
+    answer.push_back(queue.front());
     return answer;
 }

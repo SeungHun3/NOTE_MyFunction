@@ -23,5 +23,9 @@ public:
 	int 프로세스(vector<int> priorities, int location);
 	int 다리를지나는트럭(int bridge_length, int weight, vector<int> truck_weights);
 	vector<int> 주식가격(vector<int> prices);
+
+	// 힙
+	int 더맵게(vector<int> scoville, int K);
+	vector<int> 이중우선순위큐(vector<string> operations);
 };
 
