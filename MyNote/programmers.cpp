@@ -19,11 +19,11 @@ int programmers::폰켓몬(vector<int> nums)
 
     if (uniqueNums.size() > count) 
     {
-        answer = count;
+        answer = (int)count;
     }
     else 
     {
-        answer = uniqueNums.size();
+        answer = (int)uniqueNums.size();
     }
    
     return answer;
@@ -94,7 +94,7 @@ bool programmers::전화번호목록(vector<string> phone_book)
         if (!table.empty())
         {
             //최소 길이의 문자열부터만 처리하여 연산 줄이기(i = min)
-            for (int i = min; i <= phone.size(); ++i)
+            for (size_t i = min; i <= phone.size(); ++i)
             {
                 //문자열을 잘라서 탐색 (+알아서 해시 처리)
                 string key = phone.substr(0, i);
@@ -174,6 +174,217 @@ int programmers::의상_다른사람풀이(vector<vector<string>> clothes)
     for (auto it = attributes.begin(); it != attributes.end(); it++)
         answer *= (it->second + 1);
     answer--;
+
+    return answer;
+}
+
+vector<int> programmers::같은숫자는싫어(vector<int> arr)
+{
+
+    vector<int> answer;
+
+    list<int> list;
+    for (auto it : arr)
+    {
+        if (list.empty())
+        {
+            list.push_back(it);
+        }
+        else
+        {
+            if (list.back() != it)
+            {
+                list.push_back(it);
+            }
+        }
+    }
+    for (auto it : list)
+    {
+        answer.push_back(it);
+    }
+
+    return answer;
+}
+
+vector<int> programmers::기능개발(vector<int> progresses, vector<int> speeds)
+{
+    vector<int> answer;
+    vector<int> days;
+    for (int i = 0; i < progresses.size(); ++i)
+    {
+        int temp = (100 - progresses[i]);
+        if (temp % speeds[i] == 0)
+        {
+            temp /= speeds[i];
+        }
+        else
+        {
+            temp = (temp / speeds[i]) + 1;
+        }
+
+        days.push_back(temp);
+    }
+    int max = days[0];
+    // 3,2,3,5,4,5
+    int count = 1;
+    for (int i = 1; i < days.size(); ++i)
+    {
+        if (max >= days[i])
+        {
+            count++;
+            if (i == (days.size() - 1))
+            {
+                answer.push_back(count);
+            }
+        }
+        else
+        {
+            answer.push_back(count);
+            max = days[i];
+            count = 1;
+            if (i == (days.size() - 1))
+            {
+                answer.push_back(count);
+            }
+        }
+
+    }
+    return answer;
+}
+
+int programmers::프로세스(vector<int> priorities, int location)
+{
+    int answer = 0;
+
+    vector<int> sortarr = priorities;
+    sort(sortarr.begin(), sortarr.end());
+    list<int>dec;
+    for (auto it : sortarr)
+    {
+        dec.push_front(it);
+    }
+    // 타겟 iterator 구하기
+    int loc = location;
+    list<int>::iterator targetIter;
+    list<int> mylist;
+    for (auto it : priorities)
+    {
+        mylist.push_back(it);
+        if (loc == 0)
+        {
+            targetIter = prev(mylist.end());
+        }
+        --loc;
+    }
+    int count = 1;
+    int decint = *dec.begin();
+    while (1)
+    {
+        if (*dec.begin() == *mylist.begin())
+        {
+            if (mylist.begin() == targetIter)
+            {
+                break;
+            }
+            dec.pop_front();
+            mylist.pop_front();
+            count++;
+
+        }
+        else
+        {
+            mylist.splice(mylist.end(), mylist, mylist.begin());
+        }
+
+    }
+    return count;
+}
+
+int programmers::다리를지나는트럭(int bridge_length, int weight, vector<int> truck_weights)
+{
+    int answer = 0;// 시간
+    int bridge = bridge_length;
+    int bweight = weight;
+    list<int> wait_trucks;
+    list<int>going_trucks; // value = 무게,length = 현재 건너고 있는 시간
+
+    for (auto it : truck_weights)
+    {
+        wait_trucks.push_back(it);
+    }
+
+    while (true)
+    {
+
+        answer++;
+
+        // 트럭빼기
+        if (bridge <= going_trucks.size())
+        {
+            going_trucks.pop_front();
+        }
+
+        int going_weight = 0;
+        for (auto it : going_trucks)
+        {
+            going_weight += it;   // 무게 구해서
+        }
+
+
+        // 트럭 넣기 = 대기트럭 빼고 건너는 트럭에 넣기
+        if (!wait_trucks.empty()) // 기다리는 트럭이 있다면
+        {
+
+            int start_Truck = wait_trucks.front();
+
+            if (bweight >= start_Truck + going_weight) // 트럭이 갈 수 있을 때
+            {
+                going_weight += start_Truck;
+                going_trucks.push_back(start_Truck);
+                wait_trucks.pop_front();
+
+            }
+            else // 트럭이 갈 수 없을 때
+            {
+                going_trucks.push_back(0);
+            }
+
+
+        }
+        else // 기다리는 트럭이 없다면
+        {
+            // 건너고 있는 트럭이 없다면
+            if (going_weight == 0)
+            {
+                break;
+            }
+            going_trucks.push_back(0);
+        }
+
+    }
+
+    return answer;
+}
+
+vector<int> programmers::주식가격(vector<int> prices)
+{
+    vector<int> answer;
+
+    for (int i = 0; i < prices.size(); ++i)
+    {
+        int time = 0;
+        for (int j = i + 1; j < prices.size(); ++j)
+        {
+            int target = prices[i];
+            int compare = prices[j];
+            time++;
+            if (target > compare)
+            {
+                break;
+            }
+        }
+        answer.push_back(time);
+    }
 
     return answer;
 }

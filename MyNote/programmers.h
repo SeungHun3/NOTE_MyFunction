@@ -16,5 +16,12 @@ public:
 
 	int 의상(vector<vector<string>> clothes);
 	int 의상_다른사람풀이(vector<vector<string>> clothes);
+
+    // 스택, 큐
+	vector<int> 같은숫자는싫어(vector<int> arr);
+	vector<int> 기능개발(vector<int> progresses, vector<int> speeds);
+	int 프로세스(vector<int> priorities, int location);
+	int 다리를지나는트럭(int bridge_length, int weight, vector<int> truck_weights);
+	vector<int> 주식가격(vector<int> prices);
 };
 
