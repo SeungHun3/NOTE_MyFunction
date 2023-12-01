@@ -5,6 +5,7 @@
 #include <map>
 #include <algorithm>
 #include <queue>
+
 using namespace std;
 
 int programmers::폰켓몬(vector<int> nums)
@@ -529,5 +530,172 @@ int programmers::h_index(vector<int> citations)
         }
     }
 
+    return answer;
+}
+
+int programmers::최소직사각형(vector<vector<int>> sizes)
+{
+    int answer = 0;
+    // 작은 것 가로
+    int width = 0;
+    // 큰 것 세로
+    int height = 0;
+
+    for (auto it : sizes)
+    {
+        int imax = max(it[0], it[1]);
+        int imin = min(it[0], it[1]);
+        if (height < imax)
+        {
+            height = imax;
+        }
+        if (width < imin)
+        {
+            width = imin;
+        }
+    }
+    answer = width * height;
+    return answer;
+}
+
+vector<int> programmers::모의고사(vector<int> answers)
+{
+    vector<int> answer;
+    vector<int> p1 = { 1, 2, 3, 4, 5 };
+    vector<int> p2 = { 2, 1, 2, 3, 2, 4, 2, 5 };
+    vector<int> p3 = { 3, 3, 1, 1, 2, 2, 4, 4, 5, 5 };
+    int count1 = 0;
+    int count2 = 0;
+    int count3 = 0;
+
+    for (int i = 0; i < answers.size(); ++i)
+    {
+        int answer = answers[i];
+        int p1_answer = p1[i % 5];
+        int p2_answer = p2[i % 8];
+        int p3_answer = p3[i % 10];
+
+        if (answer == p1_answer)
+        {
+            count1++;
+        }
+        if (answer == p2_answer)
+        {
+            count2++;
+        }
+        if (answer == p3_answer)
+        {
+            count3++;
+        }
+    }
+    int maxCnt = max(count1, count2);
+    maxCnt = max(maxCnt, count3);
+
+    if (maxCnt == count1) answer.push_back(1);
+    if (maxCnt == count2) answer.push_back(2);
+    if (maxCnt == count3) answer.push_back(3);
+
+    return answer;
+}
+
+vector<int> programmers::카펫(int brown, int yellow)
+{
+    vector<int> answer;
+
+    // yellow를 약수로 나누어 노란색 카펫의 가로와 세로 길이를 찾음
+    for (int i = 1; i <= yellow; i++) {
+        if (yellow % i == 0) {
+            int yellow_width = yellow / i;
+            int yellow_height = i;
+
+            // 노란색 카펫을 감싸는 전체 카펫의 가로와 세로 길이 계산
+            int brown_width = yellow_width + 2;
+            int brown_height = yellow_height + 2;
+
+            // 갈색 격자의 수가 주어진 brown과 일치하는지 확인
+            if ((brown_width * 2 + brown_height * 2 - 4) == brown) {
+                answer.push_back(brown_width);
+                answer.push_back(brown_height);
+                break;
+            }
+        }
+    }
+
+    return answer;
+}
+
+
+bool 피로도ch[9] = { false };
+vector<vector<int>> 피로도dungeon;
+int 피로도answer = -1;
+void 피로도dfs(int k, int count)
+{
+    if (k < 0) {
+        return;
+    }
+    for (int i = 0; i < 피로도dungeon.size(); i++)
+    {
+        //방문하지 않았고 최소 필요 피로도 조건 만족하는 노드로 이동하여 탐색
+        if (!피로도ch[i] && k >= 피로도dungeon[i][0])
+        { 
+            피로도ch[i] = true;
+            피로도dfs(k - 피로도dungeon[i][1], count + 1);
+            피로도ch[i] = false;
+        }
+    }
+    피로도answer = max(피로도answer, count);
+}
+int programmers::피로도(int k, vector<vector<int>> dungeons)
+{
+    피로도dungeon = dungeons;
+    피로도dfs(k, 0);
+
+    return 피로도answer;
+}
+
+int counter = 0;
+bool visit[101];
+
+void dfs(vector<vector<int>>& v, int num) {
+
+    counter++;
+    visit[num] = true;
+
+    for (int i = 0; i < v[num].size(); i++) 
+    {
+        if (!visit[v[num][i]]) 
+        {
+            dfs(v, v[num][i]);
+        }
+    }
+
+}
+int programmers::전력망둘로나누기(int n, vector<vector<int>> wires)
+{
+    int answer = n;
+
+    for (int i = 0; i < n - 1; i++) 
+    {
+        vector<vector<int>> v(n + 1, vector<int>());
+        memset(visit, 0, sizeof(visit));
+        counter = 0;
+
+        for (int j = 0; j < n - 1; j++) 
+        {
+            if (i == j)
+                continue;
+            else 
+            {
+                // 양방향 연결
+                v[wires[j][0]].push_back(wires[j][1]);
+                v[wires[j][1]].push_back(wires[j][0]);
+            }
+
+        }
+        dfs(v, 1);
+        if (abs(counter - abs(n - counter)) <= answer)
+            answer = abs(counter - abs(n - counter));
+
+    }
     return answer;
 }

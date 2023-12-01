@@ -8,12 +8,9 @@ class programmers
 {
 public:
 	// 해시문제
-	int 폰켓몬(vector<int>nums);
-
+	static int 폰켓몬(vector<int>nums);
 	string 완주하지못한선수(vector<string> participant, vector<string> completion);
-
 	bool 전화번호목록(vector<string> phone_book);
-
 	int 의상(vector<vector<string>> clothes);
 	int 의상_다른사람풀이(vector<vector<string>> clothes);
 
@@ -32,5 +29,13 @@ public:
 	vector<int> k번째수(vector<int> array, vector<vector<int>> commands);
 	string 가장큰수(vector<int> numbers);
 	int h_index(vector<int> citations);
+
+	//완전 탐색
+	int 최소직사각형(vector<vector<int>> sizes);
+	vector<int> 모의고사(vector<int> answers);
+	vector<int> 카펫(int brown, int yellow);
+	static int 피로도(int k, vector<vector<int>> dungeons); 
+	static int 전력망둘로나누기(int n, vector<vector<int>> wires);
+
 };
 
