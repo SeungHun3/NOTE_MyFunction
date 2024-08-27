@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <iostream>
 #include <vector>
 
@@ -7,35 +7,40 @@ using namespace std;
 class programmers
 {
 public:
-	// ÇØ½Ã¹®Á¦
-	static int ÆùÄÏ¸ó(vector<int>nums);
-	string ¿ÏÁÖÇÏÁö¸øÇÑ¼±¼ö(vector<string> participant, vector<string> completion);
-	bool ÀüÈ­¹øÈ£¸ñ·Ï(vector<string> phone_book);
-	int ÀÇ»ó(vector<vector<string>> clothes);
-	int ÀÇ»ó_´Ù¸¥»ç¶÷Ç®ÀÌ(vector<vector<string>> clothes);
+	// í•´ì‹œë¬¸ì œ
+	static int í°ì¼“ëª¬(vector<int>nums);
+	string ì™„ì£¼í•˜ì§€ëª»í•œì„ ìˆ˜(vector<string> participant, vector<string> completion);
+	bool ì „í™”ë²ˆí˜¸ëª©ë¡(vector<string> phone_book);
+	int ì˜ìƒ(vector<vector<string>> clothes);
+	int ì˜ìƒ_ë‹¤ë¥¸ì‚¬ëŒí’€ì´(vector<vector<string>> clothes);
 
-    // ½ºÅÃ, Å¥
-	vector<int> °°Àº¼ıÀÚ´Â½È¾î(vector<int> arr);
-	vector<int> ±â´É°³¹ß(vector<int> progresses, vector<int> speeds);
-	int ÇÁ·Î¼¼½º(vector<int> priorities, int location);
-	int ´Ù¸®¸¦Áö³ª´ÂÆ®·°(int bridge_length, int weight, vector<int> truck_weights);
-	vector<int> ÁÖ½Ä°¡°İ(vector<int> prices);
+    // ìŠ¤íƒ, í
+	vector<int> ê°™ì€ìˆ«ìëŠ”ì‹«ì–´(vector<int> arr);
+	vector<int> ê¸°ëŠ¥ê°œë°œ(vector<int> progresses, vector<int> speeds);
+	int í”„ë¡œì„¸ìŠ¤(vector<int> priorities, int location);
+	int ë‹¤ë¦¬ë¥¼ì§€ë‚˜ëŠ”íŠ¸ëŸ­(int bridge_length, int weight, vector<int> truck_weights);
+	vector<int> ì£¼ì‹ê°€ê²©(vector<int> prices);
 
-	// Èü
-	int ´õ¸Ê°Ô(vector<int> scoville, int K);
-	vector<int> ÀÌÁß¿ì¼±¼øÀ§Å¥(vector<string> operations);
+	// í™
+	int ë”ë§µê²Œ(vector<int> scoville, int K);
+	vector<int> ì´ì¤‘ìš°ì„ ìˆœìœ„í(vector<string> operations);
 
-	// Á¤·Ä
-	vector<int> k¹øÂ°¼ö(vector<int> array, vector<vector<int>> commands);
-	string °¡ÀåÅ«¼ö(vector<int> numbers);
+	// ì •ë ¬
+	vector<int> kë²ˆì§¸ìˆ˜(vector<int> array, vector<vector<int>> commands);
+	string ê°€ì¥í°ìˆ˜(vector<int> numbers);
 	int h_index(vector<int> citations);
 
-	//¿ÏÀü Å½»ö
-	int ÃÖ¼ÒÁ÷»ç°¢Çü(vector<vector<int>> sizes);
-	vector<int> ¸ğÀÇ°í»ç(vector<int> answers);
-	vector<int> Ä«Æê(int brown, int yellow);
-	static int ÇÇ·Îµµ(int k, vector<vector<int>> dungeons); 
-	static int Àü·Â¸ÁµÑ·Î³ª´©±â(int n, vector<vector<int>> wires);
+	// íƒìƒ‰
+	int ìµœì†Œì§ì‚¬ê°í˜•(vector<vector<int>> sizes);
+	vector<int> ëª¨ì˜ê³ ì‚¬(vector<int> answers);
+	vector<int> ì¹´í«(int brown, int yellow);
+	static int í”¼ë¡œë„(int k, vector<vector<int>> dungeons); 
+	static int ì „ë ¥ë§ë‘˜ë¡œë‚˜ëˆ„ê¸°(int n, vector<vector<int>> wires);
+	static int ëª¨ìŒì‚¬ì „(string word);
+	static int íƒ€ê²Ÿë„˜ë²„(vector<int> numbers, int target);
+	static int ë„¤íŠ¸ì›Œí¬(int n, vector<vector<int>> computers);
+	
+	static int ê°€ì¥ë§ì´ë°›ì€ì„ ë¬¼(vector<string> friends, vector<string> gifts);
 
 };
 

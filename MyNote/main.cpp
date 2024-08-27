@@ -1,27 +1,27 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include "programmers.h"
 
 using namespace std;
 
 int main() {
+    //vector<vector<int>> a = { {1, 1, 0}, {1, 1, 0}, {0, 0, 1} };
 
-    programmers* repo = new programmers;
-    vector<int>a = { 1,2,4,5,7,5,6,7,4,3 };
-    cout << repo->ÆùÄÏ¸ó(a) << endl;
-    cout << "==========================" << endl;
+    //programmers::ë„¤íŠ¸ì›Œí¬(3, a);
 
-    vector<string> participant = { "a","b","c","d","e","f","g" };
-    vector<string> completion = { "a","b","c","d","e","g" };
-    cout << repo->¿ÏÁÖÇÏÁö¸øÇÑ¼±¼ö(participant, completion) << endl;
-    cout << "==========================" << endl;
 
-    vector<string> phone_book = { "124","112412","55576641","124214" };
-    repo->ÀüÈ­¹øÈ£¸ñ·Ï(phone_book);
-    cout << "==========================" << endl;
+    //vector<string> friends = { "muzi", "ryan", "frodo", "neo" };
+    //vector<string> gifts = { "muzi frodo", "muzi frodo", "ryan muzi", "ryan muzi", "ryan muzi", "frodo muzi", "frodo ryan", "neo muzi"};
 
-    vector<vector<string>> cloth = { {"yellow_hat", "headgear"},{"blue_sunglasses", "eyewear"}, { "green_turban", "headgear" },{"blue_sunglasses", "eyewear"} ,{"blue_sunglasses", "eyewear"} ,{"blue_sunglasses", "under"},{"blue_sunglasses", "under"},{"blue_sunglasses", "under"},{"blue_sunglasses", "under"}};
-    repo->ÀÇ»ó(cloth);
+    //vector<string> friends = { "a", "b", "c" };
+    //vector<string> gifts = { "a b", "b a", "c a", "a c", "a c", "c a"};
 
-    delete repo;
+    //vector<string> friends = { "joy", "brad", "alessandro", "conan", "david" };
+    //vector<string> gifts = { "alessandro brad", "alessandro joy", "alessandro conan", "david alessandro", "alessandro david" };
+
+
+    // gift ë¥¼ space ê¸°ì¤€ìœ¼ë¡œ ì£¼ê³ ë°›ì€ ì‚¬ëŒ êµ¬ë¶„í•˜ê¸°
+    //programmers::ê°€ì¥ë§ì´ë°›ì€ì„ ë¬¼(friends, gifts);
+    
+
     return 0;
 }

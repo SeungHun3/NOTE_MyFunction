@@ -1,21 +1,23 @@
-#include "programmers.h"
+ï»¿#include "programmers.h"
 #include <string>
 #include <set>
 #include <unordered_set>
 #include <map>
 #include <algorithm>
 #include <queue>
+#include <functional>
+#include <sstream>
 
 using namespace std;
 
-int programmers::ÆùÄÏ¸ó(vector<int> nums)
+int programmers::í°ì¼“ëª¬(vector<int> nums)
 {
-    // °¡Àå ¸¹Àº Á¾·ù Ã£±â
+    // ê°€ì¥ ë§ì€ ì¢…ë¥˜ ì°¾ê¸°
     int answer = 0;
     
     set<int> uniqueNums(nums.begin(), nums.end());
-    //nums.erase(unique(nums.begin(), nums.end()), nums.end());µµ °¡´É
-    // unique(nums.begin(), nums.end()); => Áßº¹¹®ÀÚ ¾øÀÌ Á¤·Ä ÈÄ // ³²´Â ÀÚ¸®¿£ ±âÁ¸ ¹è¿­ÀÇ °ªÁ¸Àç
+    //nums.erase(unique(nums.begin(), nums.end()), nums.end());ë„ ê°€ëŠ¥
+    // unique(nums.begin(), nums.end()); => ì¤‘ë³µë¬¸ì ì—†ì´ ì •ë ¬ í›„ // ë‚¨ëŠ” ìë¦¬ì—” ê¸°ì¡´ ë°°ì—´ì˜ ê°’ì¡´ì¬
 
     size_t count = nums.size() / 2;
 
@@ -31,24 +33,24 @@ int programmers::ÆùÄÏ¸ó(vector<int> nums)
     return answer;
 }
 
-string programmers::¿ÏÁÖÇÏÁö¸øÇÑ¼±¼ö(vector<string> participant, vector<string> completion)
+string programmers::ì™„ì£¼í•˜ì§€ëª»í•œì„ ìˆ˜(vector<string> participant, vector<string> completion)
 {
-    // ¸ğµç Âü°¡ÀÚ Áß 1¸í¸¸ ¿ÏÁÖÇÏÁö ¸øÇÔ
-    // ¸ğµç Âü°¡ÀÚ ÀÌ¸§ ÁÖ¾îÁü, ¿ÏÁÖÀÚ ÀÌ¸§ ÁÖ¾îÁü
+    // ëª¨ë“  ì°¸ê°€ì ì¤‘ 1ëª…ë§Œ ì™„ì£¼í•˜ì§€ ëª»í•¨
+    // ëª¨ë“  ì°¸ê°€ì ì´ë¦„ ì£¼ì–´ì§, ì™„ì£¼ì ì´ë¦„ ì£¼ì–´ì§
     string answer = "";
     map<string,int > check;
-    // Âü°¡ÀÚ ¸í´ÜÀ» map¿¡ Ãß°¡
+    // ì°¸ê°€ì ëª…ë‹¨ì„ mapì— ì¶”ê°€
     for (const string& parti_person : participant)
     {
-        check[parti_person]++; // ¸Ê¿¡ Å°¿Í, 1À» ³Ö¾îÁÜ
+        check[parti_person]++; // ë§µì— í‚¤ì™€, 1ì„ ë„£ì–´ì¤Œ
     }
-    // ¿ÏÁÖÇÑ ¼±¼ö¸¦ map¿¡¼­ Á¦°Å
+    // ì™„ì£¼í•œ ì„ ìˆ˜ë¥¼ mapì—ì„œ ì œê±°
     for (const string& comp_person : completion)
     {
-        check[comp_person]--; // ¸Ê¿¡ Å°ÀÇ value ¿¡ 0À¸·Î ÁÙÀÓ
+        check[comp_person]--; // ë§µì— í‚¤ì˜ value ì— 0ìœ¼ë¡œ ì¤„ì„
     }
 
-    for (const auto& pair : check)  // 1ÀÎ value¸¦ Ã£±â
+    for (const auto& pair : check)  // 1ì¸ valueë¥¼ ì°¾ê¸°
     {
         if (pair.second > 0) {
             answer = pair.first;
@@ -57,10 +59,10 @@ string programmers::¿ÏÁÖÇÏÁö¸øÇÑ¼±¼ö(vector<string> participant, vector<string> 
     }
 
 
-    // ´Ù¸¥»ç¶÷ Ç®ÀÌ 
+    // ë‹¤ë¥¸ì‚¬ëŒ í’€ì´ 
 
     /*
-    **Á¤·Ä ÈÄ ºñ±³
+    **ì •ë ¬ í›„ ë¹„êµ
     * 
      sort(participant.begin(), participant.end());
     sort(completion.begin(), completion.end());
@@ -76,29 +78,29 @@ string programmers::¿ÏÁÖÇÏÁö¸øÇÑ¼±¼ö(vector<string> participant, vector<string> 
     return answer;
 }
 
-bool programmers::ÀüÈ­¹øÈ£¸ñ·Ï(vector<string> phone_book)
+bool programmers::ì „í™”ë²ˆí˜¸ëª©ë¡(vector<string> phone_book)
 {
 
-    //ÀüÈ­¹øÈ£ºÎ¿¡ ÀûÈù ÀüÈ­¹øÈ£¸¦ ´ãÀº ¹è¿­ phone_book ÀÌ solution ÇÔ¼öÀÇ ¸Å°³º¯¼ö·Î ÁÖ¾îÁú ¶§, 
-    //¾î¶² ¹øÈ£°¡ ´Ù¸¥ ¹øÈ£ÀÇ Á¢µÎ¾îÀÎ °æ¿ì°¡ ÀÖÀ¸¸é false¸¦ 
-    // ±×·¸Áö ¾ÊÀ¸¸é true¸¦ return ÇÏµµ·Ï solution ÇÔ¼ö¸¦ ÀÛ¼ºÇØÁÖ¼¼¿ä.
+    //ì „í™”ë²ˆí˜¸ë¶€ì— ì íŒ ì „í™”ë²ˆí˜¸ë¥¼ ë‹´ì€ ë°°ì—´ phone_book ì´ solution í•¨ìˆ˜ì˜ ë§¤ê°œë³€ìˆ˜ë¡œ ì£¼ì–´ì§ˆ ë•Œ, 
+    //ì–´ë–¤ ë²ˆí˜¸ê°€ ë‹¤ë¥¸ ë²ˆí˜¸ì˜ ì ‘ë‘ì–´ì¸ ê²½ìš°ê°€ ìˆìœ¼ë©´ falseë¥¼ 
+    // ê·¸ë ‡ì§€ ì•Šìœ¼ë©´ trueë¥¼ return í•˜ë„ë¡ solution í•¨ìˆ˜ë¥¼ ì‘ì„±í•´ì£¼ì„¸ìš”.
 
-    // vector<string> ¹®ÀÚ->¼ıÀÚ ³»¸²Â÷¼ø Á¤·Ä
+    // vector<string> ë¬¸ì->ìˆ«ì ë‚´ë¦¼ì°¨ìˆœ ì •ë ¬
     sort(phone_book.begin(), phone_book.end(), [](const string& a, const string& b) {
         return stoi(a) < stoi(b);
         });
     
-    set<string> table;        //setÀÌ hash¸¦ ºÒ·¯¿Í¼­ ¾Ë¾Æ¼­ stringÀ» ÇØ½Ã Ã³¸®
-    size_t min = 0xFFFFFFFF;  // size_t(unsigned int)¸¦ »ç¿ëÇÏ¿© 8¹ÙÀÌÆ® Á¤¼ö ÀÚ·áÇüÀÇ ÃÖ´ë°ªÀ¸·Î ÃÊ±âÈ­ 
+    set<string> table;        //setì´ hashë¥¼ ë¶ˆëŸ¬ì™€ì„œ ì•Œì•„ì„œ stringì„ í•´ì‹œ ì²˜ë¦¬
+    size_t min = 0xFFFFFFFF;  // size_t(unsigned int)ë¥¼ ì‚¬ìš©í•˜ì—¬ 8ë°”ì´íŠ¸ ì •ìˆ˜ ìë£Œí˜•ì˜ ìµœëŒ€ê°’ìœ¼ë¡œ ì´ˆê¸°í™” 
 
     for (string phone : phone_book)
     {
         if (!table.empty())
         {
-            //ÃÖ¼Ò ±æÀÌÀÇ ¹®ÀÚ¿­ºÎÅÍ¸¸ Ã³¸®ÇÏ¿© ¿¬»ê ÁÙÀÌ±â(i = min)
+            //ìµœì†Œ ê¸¸ì´ì˜ ë¬¸ìì—´ë¶€í„°ë§Œ ì²˜ë¦¬í•˜ì—¬ ì—°ì‚° ì¤„ì´ê¸°(i = min)
             for (size_t i = min; i <= phone.size(); ++i)
             {
-                //¹®ÀÚ¿­À» Àß¶ó¼­ Å½»ö (+¾Ë¾Æ¼­ ÇØ½Ã Ã³¸®)
+                //ë¬¸ìì—´ì„ ì˜ë¼ì„œ íƒìƒ‰ (+ì•Œì•„ì„œ í•´ì‹œ ì²˜ë¦¬)
                 string key = phone.substr(0, i);
                 if (table.find(key) != table.end())
                 {
@@ -107,10 +109,10 @@ bool programmers::ÀüÈ­¹øÈ£¸ñ·Ï(vector<string> phone_book)
             }
         }
 
-        //»õ·Î¿î ¸â¹ö ¹®ÀÚ¿­À» set¿¡ Ãß°¡. Å×ÀÌºíÀ» ¸ÕÀú µî·ÏÇÏ¿© Å°°ªÀÌ Áßº¹µÇ´Â ÀÌ½´µµ ¾øÀ½
+        //ìƒˆë¡œìš´ ë©¤ë²„ ë¬¸ìì—´ì„ setì— ì¶”ê°€. í…Œì´ë¸”ì„ ë¨¼ì € ë“±ë¡í•˜ì—¬ í‚¤ê°’ì´ ì¤‘ë³µë˜ëŠ” ì´ìŠˆë„ ì—†ìŒ
         table.insert(phone);
 
-        //¹®ÀÚ¿­ ±æÀÌÀÇ ÃÖ¼Ò°ª °»½Å 
+        //ë¬¸ìì—´ ê¸¸ì´ì˜ ìµœì†Œê°’ ê°±ì‹  
         if (phone.size() < min)
         {
             min = phone.size();
@@ -121,18 +123,18 @@ bool programmers::ÀüÈ­¹øÈ£¸ñ·Ï(vector<string> phone_book)
     return true;
 }
 
-int programmers::ÀÇ»ó(vector<vector<string>> clothes)
+int programmers::ì˜ìƒ(vector<vector<string>> clothes)
 {
     int answer = 0;
-    // ex) 0, 1, 2 °¡ Á¸ÀçÇÑ´Ù¸é 
+    // ex) 0, 1, 2 ê°€ ì¡´ì¬í•œë‹¤ë©´ 
     // 0, 0*1, 0*2, 0*1*2, 
     // 1, 1*2, 
     // 2 
-    // ÀÇ Á¶ÇÕ¹æ¹ıÀ» »ç¿ëÇØ¾ßÇÔ
+    // ì˜ ì¡°í•©ë°©ë²•ì„ ì‚¬ìš©í•´ì•¼í•¨
 
 
     map<string,int> checkName;
-    // ¿ì¼± ¸Ê¿¡ ¾ÆÀÌÅÛ Á¾·ùº° °¹¼ö ³ÖÀº ´ÙÀ½
+    // ìš°ì„  ë§µì— ì•„ì´í…œ ì¢…ë¥˜ë³„ ê°¯ìˆ˜ ë„£ì€ ë‹¤ìŒ
     for (vector<string> type : clothes)
     {
         checkName[type[1]]++;
@@ -142,31 +144,31 @@ int programmers::ÀÇ»ó(vector<vector<string>> clothes)
     {
         originArray.push_back(it.second);
     }
-    // ¿¹¿ÜÃ³¸®
+    // ì˜ˆì™¸ì²˜ë¦¬
     if (originArray.size() <= 0)
         return 0;
 
     int sum = 1;
 
-    // Á¶ÇÕ ¹æ¹ı ¼öÇĞ½Ä 
-    // ¿Ê 2 ¸Ó¸® 1 ¹ÙÁö 5 => ¿Ê(2+1) * ¸Ó¸®(1+1) * ¹ÙÁö(5+1) - 1
+    // ì¡°í•© ë°©ë²• ìˆ˜í•™ì‹ 
+    // ì˜· 2 ë¨¸ë¦¬ 1 ë°”ì§€ 5 => ì˜·(2+1) * ë¨¸ë¦¬(1+1) * ë°”ì§€(5+1) - 1
     vector<int> changedArray;
-    for (int i = 0; i < originArray.size(); i++) // °¢ º¯¼öÀÇ °ª +1 
+    for (int i = 0; i < originArray.size(); i++) // ê° ë³€ìˆ˜ì˜ ê°’ +1 
     {
         changedArray.push_back(originArray[i] + 1);
     }
     
     for (auto it : changedArray)
     {
-        sum *= it; // °¢ º¯¼öÀÇ °ª ¸ğµÎ °öÇÏ±â
+        sum *= it; // ê° ë³€ìˆ˜ì˜ ê°’ ëª¨ë‘ ê³±í•˜ê¸°
     }
-    answer = sum - 1; // ¸¶Áö¸· 1 »©±â
+    answer = sum - 1; // ë§ˆì§€ë§‰ 1 ë¹¼ê¸°
 
 
     return answer;
 }
 
-int programmers::ÀÇ»ó_´Ù¸¥»ç¶÷Ç®ÀÌ(vector<vector<string>> clothes)
+int programmers::ì˜ìƒ_ë‹¤ë¥¸ì‚¬ëŒí’€ì´(vector<vector<string>> clothes)
 {
     int answer = 1;
 
@@ -180,7 +182,7 @@ int programmers::ÀÇ»ó_´Ù¸¥»ç¶÷Ç®ÀÌ(vector<vector<string>> clothes)
     return answer;
 }
 
-vector<int> programmers::°°Àº¼ıÀÚ´Â½È¾î(vector<int> arr)
+vector<int> programmers::ê°™ì€ìˆ«ìëŠ”ì‹«ì–´(vector<int> arr)
 {
 
     vector<int> answer;
@@ -208,7 +210,7 @@ vector<int> programmers::°°Àº¼ıÀÚ´Â½È¾î(vector<int> arr)
     return answer;
 }
 
-vector<int> programmers::±â´É°³¹ß(vector<int> progresses, vector<int> speeds)
+vector<int> programmers::ê¸°ëŠ¥ê°œë°œ(vector<int> progresses, vector<int> speeds)
 {
     vector<int> answer;
     vector<int> days;
@@ -254,7 +256,7 @@ vector<int> programmers::±â´É°³¹ß(vector<int> progresses, vector<int> speeds)
     return answer;
 }
 
-int programmers::ÇÁ·Î¼¼½º(vector<int> priorities, int location)
+int programmers::í”„ë¡œì„¸ìŠ¤(vector<int> priorities, int location)
 {
     int answer = 0;
 
@@ -265,7 +267,7 @@ int programmers::ÇÁ·Î¼¼½º(vector<int> priorities, int location)
     {
         dec.push_front(it);
     }
-    // Å¸°Ù iterator ±¸ÇÏ±â
+    // íƒ€ê²Ÿ iterator êµ¬í•˜ê¸°
     int loc = location;
     list<int>::iterator targetIter;
     list<int> mylist;
@@ -302,13 +304,13 @@ int programmers::ÇÁ·Î¼¼½º(vector<int> priorities, int location)
     return count;
 }
 
-int programmers::´Ù¸®¸¦Áö³ª´ÂÆ®·°(int bridge_length, int weight, vector<int> truck_weights)
+int programmers::ë‹¤ë¦¬ë¥¼ì§€ë‚˜ëŠ”íŠ¸ëŸ­(int bridge_length, int weight, vector<int> truck_weights)
 {
-    int answer = 0;// ½Ã°£
+    int answer = 0;// ì‹œê°„
     int bridge = bridge_length;
     int bweight = weight;
     list<int> wait_trucks;
-    list<int>going_trucks; // value = ¹«°Ô,length = ÇöÀç °Ç³Ê°í ÀÖ´Â ½Ã°£
+    list<int>going_trucks; // value = ë¬´ê²Œ,length = í˜„ì¬ ê±´ë„ˆê³  ìˆëŠ” ì‹œê°„
 
     for (auto it : truck_weights)
     {
@@ -320,7 +322,7 @@ int programmers::´Ù¸®¸¦Áö³ª´ÂÆ®·°(int bridge_length, int weight, vector<int> tru
 
         answer++;
 
-        // Æ®·°»©±â
+        // íŠ¸ëŸ­ë¹¼ê¸°
         if (bridge <= going_trucks.size())
         {
             going_trucks.pop_front();
@@ -329,33 +331,33 @@ int programmers::´Ù¸®¸¦Áö³ª´ÂÆ®·°(int bridge_length, int weight, vector<int> tru
         int going_weight = 0;
         for (auto it : going_trucks)
         {
-            going_weight += it;   // ¹«°Ô ±¸ÇØ¼­
+            going_weight += it;   // ë¬´ê²Œ êµ¬í•´ì„œ
         }
 
 
-        // Æ®·° ³Ö±â = ´ë±âÆ®·° »©°í °Ç³Ê´Â Æ®·°¿¡ ³Ö±â
-        if (!wait_trucks.empty()) // ±â´Ù¸®´Â Æ®·°ÀÌ ÀÖ´Ù¸é
+        // íŠ¸ëŸ­ ë„£ê¸° = ëŒ€ê¸°íŠ¸ëŸ­ ë¹¼ê³  ê±´ë„ˆëŠ” íŠ¸ëŸ­ì— ë„£ê¸°
+        if (!wait_trucks.empty()) // ê¸°ë‹¤ë¦¬ëŠ” íŠ¸ëŸ­ì´ ìˆë‹¤ë©´
         {
 
             int start_Truck = wait_trucks.front();
 
-            if (bweight >= start_Truck + going_weight) // Æ®·°ÀÌ °¥ ¼ö ÀÖÀ» ¶§
+            if (bweight >= start_Truck + going_weight) // íŠ¸ëŸ­ì´ ê°ˆ ìˆ˜ ìˆì„ ë•Œ
             {
                 going_weight += start_Truck;
                 going_trucks.push_back(start_Truck);
                 wait_trucks.pop_front();
 
             }
-            else // Æ®·°ÀÌ °¥ ¼ö ¾øÀ» ¶§
+            else // íŠ¸ëŸ­ì´ ê°ˆ ìˆ˜ ì—†ì„ ë•Œ
             {
                 going_trucks.push_back(0);
             }
 
 
         }
-        else // ±â´Ù¸®´Â Æ®·°ÀÌ ¾ø´Ù¸é
+        else // ê¸°ë‹¤ë¦¬ëŠ” íŠ¸ëŸ­ì´ ì—†ë‹¤ë©´
         {
-            // °Ç³Ê°í ÀÖ´Â Æ®·°ÀÌ ¾ø´Ù¸é
+            // ê±´ë„ˆê³  ìˆëŠ” íŠ¸ëŸ­ì´ ì—†ë‹¤ë©´
             if (going_weight == 0)
             {
                 break;
@@ -368,7 +370,7 @@ int programmers::´Ù¸®¸¦Áö³ª´ÂÆ®·°(int bridge_length, int weight, vector<int> tru
     return answer;
 }
 
-vector<int> programmers::ÁÖ½Ä°¡°İ(vector<int> prices)
+vector<int> programmers::ì£¼ì‹ê°€ê²©(vector<int> prices)
 {
     vector<int> answer;
 
@@ -391,14 +393,14 @@ vector<int> programmers::ÁÖ½Ä°¡°İ(vector<int> prices)
     return answer;
 }
 
-int programmers::´õ¸Ê°Ô(vector<int> scoville, int K)
+int programmers::ë”ë§µê²Œ(vector<int> scoville, int K)
 {
     int answer = 0;
     priority_queue<int, vector<int>, greater<int> > scv(scoville.begin(), scoville.end());
 
     while (true)
     {
-        // ¸ğµç À½½ÄÀÇ ½ºÄÚºôÁö¼ö k ÀÌ»ó ¸¸µé ¼ö ¾øÀ»¶§
+        // ëª¨ë“  ìŒì‹ì˜ ìŠ¤ì½”ë¹Œì§€ìˆ˜ k ì´ìƒ ë§Œë“¤ ìˆ˜ ì—†ì„ë•Œ
         if (scv.size() <= 1 && scv.top() < K)
         {
             return -1;
@@ -419,7 +421,7 @@ int programmers::´õ¸Ê°Ô(vector<int> scoville, int K)
     return answer;
 }
 
-vector<int> programmers::ÀÌÁß¿ì¼±¼øÀ§Å¥(vector<string> operations)
+vector<int> programmers::ì´ì¤‘ìš°ì„ ìˆœìœ„í(vector<string> operations)
 {
     vector<int> answer;
     list<int> queue;
@@ -427,7 +429,7 @@ vector<int> programmers::ÀÌÁß¿ì¼±¼øÀ§Å¥(vector<string> operations)
     {
         string str = operations[0];
         operations.erase(operations.begin());
-        // »ğÀÔ
+        // ì‚½ì…
         if (str[0] == 'I')
         {
             string substr = str.substr(2, str.size() - 2);
@@ -435,7 +437,7 @@ vector<int> programmers::ÀÌÁß¿ì¼±¼øÀ§Å¥(vector<string> operations)
             queue.push_back(push);
         }
 
-        //»èÁ¦
+        //ì‚­ì œ
         else if (str[0] == 'D')
         {
             if (queue.empty())
@@ -445,13 +447,13 @@ vector<int> programmers::ÀÌÁß¿ì¼±¼øÀ§Å¥(vector<string> operations)
             int push = stoi(substr);
             if (push > 0)
             {
-                //ÃÖ´ë°ª »èÁ¦
+                //ìµœëŒ€ê°’ ì‚­ì œ
                 list<int>::iterator MaxIter = max_element(queue.begin(), queue.end());
                 queue.erase(MaxIter);
             }
             else
             {
-                // ÃÖ¼Ò°ª »èÁ¦
+                // ìµœì†Œê°’ ì‚­ì œ
                 list<int>::iterator MinIter = min_element(queue.begin(), queue.end());
                 queue.erase(MinIter);
             }
@@ -469,7 +471,7 @@ vector<int> programmers::ÀÌÁß¿ì¼±¼øÀ§Å¥(vector<string> operations)
     return answer;
 }
 
-vector<int> programmers::k¹øÂ°¼ö(vector<int> array, vector<vector<int>> commands)
+vector<int> programmers::kë²ˆì§¸ìˆ˜(vector<int> array, vector<vector<int>> commands)
 {
     vector<int> answer;
     while (!commands.empty())
@@ -496,7 +498,7 @@ bool cmp(const string& a, const string& b) {
     else
         return false;
 }
-string programmers::°¡ÀåÅ«¼ö(vector<int> numbers)
+string programmers::ê°€ì¥í°ìˆ˜(vector<int> numbers)
 {
     string answer = "";
     vector<string> strArr;
@@ -533,12 +535,12 @@ int programmers::h_index(vector<int> citations)
     return answer;
 }
 
-int programmers::ÃÖ¼ÒÁ÷»ç°¢Çü(vector<vector<int>> sizes)
+int programmers::ìµœì†Œì§ì‚¬ê°í˜•(vector<vector<int>> sizes)
 {
     int answer = 0;
-    // ÀÛÀº °Í °¡·Î
+    // ì‘ì€ ê²ƒ ê°€ë¡œ
     int width = 0;
-    // Å« °Í ¼¼·Î
+    // í° ê²ƒ ì„¸ë¡œ
     int height = 0;
 
     for (auto it : sizes)
@@ -558,7 +560,7 @@ int programmers::ÃÖ¼ÒÁ÷»ç°¢Çü(vector<vector<int>> sizes)
     return answer;
 }
 
-vector<int> programmers::¸ğÀÇ°í»ç(vector<int> answers)
+vector<int> programmers::ëª¨ì˜ê³ ì‚¬(vector<int> answers)
 {
     vector<int> answer;
     vector<int> p1 = { 1, 2, 3, 4, 5 };
@@ -598,21 +600,21 @@ vector<int> programmers::¸ğÀÇ°í»ç(vector<int> answers)
     return answer;
 }
 
-vector<int> programmers::Ä«Æê(int brown, int yellow)
+vector<int> programmers::ì¹´í«(int brown, int yellow)
 {
     vector<int> answer;
 
-    // yellow¸¦ ¾à¼ö·Î ³ª´©¾î ³ë¶õ»ö Ä«ÆêÀÇ °¡·Î¿Í ¼¼·Î ±æÀÌ¸¦ Ã£À½
+    // yellowë¥¼ ì•½ìˆ˜ë¡œ ë‚˜ëˆ„ì–´ ë…¸ë€ìƒ‰ ì¹´í«ì˜ ê°€ë¡œì™€ ì„¸ë¡œ ê¸¸ì´ë¥¼ ì°¾ìŒ
     for (int i = 1; i <= yellow; i++) {
         if (yellow % i == 0) {
             int yellow_width = yellow / i;
             int yellow_height = i;
 
-            // ³ë¶õ»ö Ä«ÆêÀ» °¨½Î´Â ÀüÃ¼ Ä«ÆêÀÇ °¡·Î¿Í ¼¼·Î ±æÀÌ °è»ê
+            // ë…¸ë€ìƒ‰ ì¹´í«ì„ ê°ì‹¸ëŠ” ì „ì²´ ì¹´í«ì˜ ê°€ë¡œì™€ ì„¸ë¡œ ê¸¸ì´ ê³„ì‚°
             int brown_width = yellow_width + 2;
             int brown_height = yellow_height + 2;
 
-            // °¥»ö °İÀÚÀÇ ¼ö°¡ ÁÖ¾îÁø brown°ú ÀÏÄ¡ÇÏ´ÂÁö È®ÀÎ
+            // ê°ˆìƒ‰ ê²©ìì˜ ìˆ˜ê°€ ì£¼ì–´ì§„ brownê³¼ ì¼ì¹˜í•˜ëŠ”ì§€ í™•ì¸
             if ((brown_width * 2 + brown_height * 2 - 4) == brown) {
                 answer.push_back(brown_width);
                 answer.push_back(brown_height);
@@ -625,32 +627,32 @@ vector<int> programmers::Ä«Æê(int brown, int yellow)
 }
 
 
-bool ÇÇ·Îµµch[9] = { false };
-vector<vector<int>> ÇÇ·Îµµdungeon;
-int ÇÇ·Îµµanswer = -1;
-void ÇÇ·Îµµdfs(int k, int count)
+bool í”¼ë¡œë„ch[9] = { false };
+vector<vector<int>> í”¼ë¡œë„dungeon;
+int í”¼ë¡œë„answer = -1;
+void í”¼ë¡œë„dfs(int k, int count)
 {
     if (k < 0) {
         return;
     }
-    for (int i = 0; i < ÇÇ·Îµµdungeon.size(); i++)
+    for (int i = 0; i < í”¼ë¡œë„dungeon.size(); i++)
     {
-        //¹æ¹®ÇÏÁö ¾Ê¾Ò°í ÃÖ¼Ò ÇÊ¿ä ÇÇ·Îµµ Á¶°Ç ¸¸Á·ÇÏ´Â ³ëµå·Î ÀÌµ¿ÇÏ¿© Å½»ö
-        if (!ÇÇ·Îµµch[i] && k >= ÇÇ·Îµµdungeon[i][0])
+        //ë°©ë¬¸í•˜ì§€ ì•Šì•˜ê³  ìµœì†Œ í•„ìš” í”¼ë¡œë„ ì¡°ê±´ ë§Œì¡±í•˜ëŠ” ë…¸ë“œë¡œ ì´ë™í•˜ì—¬ íƒìƒ‰
+        if (!í”¼ë¡œë„ch[i] && k >= í”¼ë¡œë„dungeon[i][0])
         { 
-            ÇÇ·Îµµch[i] = true;
-            ÇÇ·Îµµdfs(k - ÇÇ·Îµµdungeon[i][1], count + 1);
-            ÇÇ·Îµµch[i] = false;
+            í”¼ë¡œë„ch[i] = true;
+            í”¼ë¡œë„dfs(k - í”¼ë¡œë„dungeon[i][1], count + 1);
+            í”¼ë¡œë„ch[i] = false;
         }
     }
-    ÇÇ·Îµµanswer = max(ÇÇ·Îµµanswer, count);
+    í”¼ë¡œë„answer = max(í”¼ë¡œë„answer, count);
 }
-int programmers::ÇÇ·Îµµ(int k, vector<vector<int>> dungeons)
+int programmers::í”¼ë¡œë„(int k, vector<vector<int>> dungeons)
 {
-    ÇÇ·Îµµdungeon = dungeons;
-    ÇÇ·Îµµdfs(k, 0);
+    í”¼ë¡œë„dungeon = dungeons;
+    í”¼ë¡œë„dfs(k, 0);
 
-    return ÇÇ·Îµµanswer;
+    return í”¼ë¡œë„answer;
 }
 
 int counter = 0;
@@ -670,7 +672,7 @@ void dfs(vector<vector<int>>& v, int num) {
     }
 
 }
-int programmers::Àü·Â¸ÁµÑ·Î³ª´©±â(int n, vector<vector<int>> wires)
+int programmers::ì „ë ¥ë§ë‘˜ë¡œë‚˜ëˆ„ê¸°(int n, vector<vector<int>> wires)
 {
     int answer = n;
 
@@ -686,7 +688,7 @@ int programmers::Àü·Â¸ÁµÑ·Î³ª´©±â(int n, vector<vector<int>> wires)
                 continue;
             else 
             {
-                // ¾ç¹æÇâ ¿¬°á
+                // ì–‘ë°©í–¥ ì—°ê²°
                 v[wires[j][0]].push_back(wires[j][1]);
                 v[wires[j][1]].push_back(wires[j][0]);
             }
@@ -698,4 +700,189 @@ int programmers::Àü·Â¸ÁµÑ·Î³ª´©±â(int n, vector<vector<int>> wires)
 
     }
     return answer;
+}
+
+
+int programmers::ëª¨ìŒì‚¬ì „(string word)
+{
+    int cnt = -1;
+    int answer = 0;
+    string target = "";
+    string aeiou = "AEIOU";
+    function<void(string)> dfs = [&](string word)
+        {
+            cnt++;
+
+            if (word == target) {
+                answer = cnt;
+                return;
+            }
+
+            if (word.length() >= 5)
+                return;
+
+            for (int i = 0; i < 5; i++)
+            {
+                dfs(word + aeiou[i]);
+            }
+        };
+
+    target = word;
+    dfs("");
+
+    return answer;
+}
+
+int programmers::íƒ€ê²Ÿë„˜ë²„(vector<int> numbers, int target)
+{
+    int answer = 0;
+    function<void(int,int)> dfs = [&](int _answer, int _index)
+        {
+            if (_index == numbers.size() && _answer == target)
+            {
+                answer++;
+                return;
+            }
+            if (_index >= numbers.size())
+                return;
+
+            int plus = _answer + numbers[_index];
+            int minus = _answer - numbers[_index];
+            int index = _index + 1;
+            dfs(plus, index);
+            dfs(minus, index);
+        };
+
+    dfs(0, 0);
+    cout << answer;
+    return answer;
+}
+
+int programmers::ë„¤íŠ¸ì›Œí¬(int n, vector<vector<int>> computers)
+{
+    int answer = 0;
+    // ìì‹ ì„ ì œì™¸í•œ 1ì„ ì°¾ì•„ì„œ visitedì— trueì²˜ë¦¬
+    bool visited[201] = { false };
+    function<void(int)> dfs = [&](int cur) 
+        {
+            if (visited[cur])
+                return;
+
+            visited[cur] = true;
+
+            for (int i = 0; i < computers[cur].size(); i++)
+            {
+                if (i == cur)
+                    continue;
+
+                if (computers[cur][i] == 1 && !visited[i])
+                {
+                    dfs(i);
+                }
+            }
+        };
+    for (int i = 0; i < n; i++)
+    {
+        if (!visited[i]) 
+        {
+            dfs(i);
+            answer++;
+        }
+    }
+    cout << answer;
+
+    return answer;
+}
+
+/*
+ì„ ë¬¼ì„ ì§ì ‘ ì „í•˜ê¸° í˜ë“¤ ë•Œ ì¹´ì¹´ì˜¤í†¡ ì„ ë¬¼í•˜ê¸° ê¸°ëŠ¥ì„ ì´ìš©í•´ ì¶•í•˜ ì„ ë¬¼ì„ ë³´ë‚¼ ìˆ˜ ìˆìŠµë‹ˆë‹¤. ë‹¹ì‹ ì˜ ì¹œêµ¬ë“¤ì´ ì´ë²ˆ ë‹¬ê¹Œì§€ ì„ ë¬¼ì„ ì£¼ê³ ë°›ì€ ê¸°ë¡ì„ ë°”íƒ•ìœ¼ë¡œ ë‹¤ìŒ ë‹¬ì— ëˆ„ê°€ ì„ ë¬¼ì„ ë§ì´ ë°›ì„ì§€ ì˜ˆì¸¡í•˜ë ¤ê³  í•©ë‹ˆë‹¤.
+
+ë‘ ì‚¬ëŒì´ ì„ ë¬¼ì„ ì£¼ê³ ë°›ì€ ê¸°ë¡ì´ ìˆë‹¤ë©´, ì´ë²ˆ ë‹¬ê¹Œì§€ ë‘ ì‚¬ëŒ ì‚¬ì´ì— ë” ë§ì€ ì„ ë¬¼ì„ ì¤€ ì‚¬ëŒì´ ë‹¤ìŒ ë‹¬ì— ì„ ë¬¼ì„ í•˜ë‚˜ ë°›ìŠµë‹ˆë‹¤.
+ì˜ˆë¥¼ ë“¤ì–´ Aê°€ Bì—ê²Œ ì„ ë¬¼ì„ 5ë²ˆ ì¤¬ê³ , Bê°€ Aì—ê²Œ ì„ ë¬¼ì„ 3ë²ˆ ì¤¬ë‹¤ë©´ ë‹¤ìŒ ë‹¬ì—” Aê°€ Bì—ê²Œ ì„ ë¬¼ì„ í•˜ë‚˜ ë°›ìŠµë‹ˆë‹¤.
+// ì˜ˆì™¸ ì²˜ë¦¬
+ë‘ ì‚¬ëŒì´ ì„ ë¬¼ì„ ì£¼ê³ ë°›ì€ ê¸°ë¡ì´ í•˜ë‚˜ë„ ì—†ê±°ë‚˜ ì£¼ê³ ë°›ì€ ìˆ˜ê°€ ê°™ë‹¤ë©´, ì„ ë¬¼ ì§€ìˆ˜ê°€ ë” í° ì‚¬ëŒì´ ì„ ë¬¼ ì§€ìˆ˜ê°€ ë” ì‘ì€ ì‚¬ëŒì—ê²Œ ì„ ë¬¼ì„ í•˜ë‚˜ ë°›ìŠµë‹ˆë‹¤.
+ì„ ë¬¼ ì§€ìˆ˜ëŠ” ì´ë²ˆ ë‹¬ê¹Œì§€ ìì‹ ì´ ì¹œêµ¬ë“¤ì—ê²Œ ì¤€ ì„ ë¬¼ì˜ ìˆ˜ì—ì„œ ë°›ì€ ì„ ë¬¼ì˜ ìˆ˜ë¥¼ ëº€ ê°’ì…ë‹ˆë‹¤.
+ì˜ˆë¥¼ ë“¤ì–´ Aê°€ ì¹œêµ¬ë“¤ì—ê²Œ ì¤€ ì„ ë¬¼ì´ 3ê°œê³  ë°›ì€ ì„ ë¬¼ì´ 10ê°œë¼ë©´ Aì˜ ì„ ë¬¼ ì§€ìˆ˜ëŠ” -7ì…ë‹ˆë‹¤. Bê°€ ì¹œêµ¬ë“¤ì—ê²Œ ì¤€ ì„ ë¬¼ì´ 3ê°œê³  ë°›ì€ ì„ ë¬¼ì´ 2ê°œë¼ë©´ Bì˜ ì„ ë¬¼ ì§€ìˆ˜ëŠ” 1ì…ë‹ˆë‹¤. ë§Œì•½ Aì™€ Bê°€ ì„ ë¬¼ì„ ì£¼ê³ ë°›ì€ ì ì´ ì—†ê±°ë‚˜ ì •í™•íˆ ê°™ì€ ìˆ˜ë¡œ ì„ ë¬¼ì„ ì£¼ê³ ë°›ì•˜ë‹¤ë©´, ë‹¤ìŒ ë‹¬ì—” Bê°€ Aì—ê²Œ ì„ ë¬¼ì„ í•˜ë‚˜ ë°›ìŠµë‹ˆë‹¤.
+ë§Œì•½ ë‘ ì‚¬ëŒì˜ ì„ ë¬¼ ì§€ìˆ˜ë„ ê°™ë‹¤ë©´ ë‹¤ìŒ ë‹¬ì— ì„ ë¬¼ì„ ì£¼ê³ ë°›ì§€ ì•ŠìŠµë‹ˆë‹¤.
+*/
+
+int programmers::ê°€ì¥ë§ì´ë°›ì€ì„ ë¬¼(vector<string> friends, vector<string> gifts)
+{
+	int answer = 0;
+
+    // case 1
+	//vector<string> friends = { "muzi", "ryan", "frodo", "neo" };
+	//vector<string> gifts = { "muzi frodo", "muzi frodo", "ryan muzi", "ryan muzi", "ryan muzi", "frodo muzi", "frodo ryan", "neo muzi" };
+    // 
+    // case 2
+	//vector<string> friends = { "a", "b", "c" };
+	//vector<string> gifts = { "a b", "b a", "c a", "a c", "a c", "c a"};
+    // 
+    // case 3
+	//vector<string> friends = { "joy", "brad", "alessandro", "conan", "david" };
+	//vector<string> gifts = { "alessandro brad", "alessandro joy", "alessandro conan", "david alessandro", "alessandro david" };
+	
+    // gift ë¥¼ space ê¸°ì¤€ìœ¼ë¡œ ì£¼ê³ ë°›ì€ ì‚¬ëŒ êµ¬ë¶„í•˜ê¸°
+
+    map<string, map<string, int>> giftLog;
+    map<string, int> giftValue;
+    // ì´ˆê¸°í™”
+    for (auto& giver : friends)
+    {
+        for (auto& receiver : friends)
+        {
+            if (giver != receiver)
+            {
+                giftLog[giver][receiver] = 0;
+            }
+        }
+        giftValue[giver] = 0;
+    }
+
+    for (const auto& gift : gifts)
+    {
+        stringstream ss(gift);
+        string giver;
+        string receiver;
+
+        getline(ss, giver, ' ');
+        getline(ss, receiver);
+
+        // ì„ ë¬¼ì§€ìˆ˜
+        giftLog[giver][receiver] += 1;
+        giftLog[receiver][giver] -= 1;
+
+        giftValue[giver] += 1;
+        giftValue[receiver] -= 1;
+    }
+
+    int max = 0;
+
+    for (auto& giver : friends)
+    {
+        int count = 0;
+        for (auto it : giftLog[giver])
+        {
+            string receiver = it.first;
+
+            if (giftLog[giver][receiver] > giftLog[receiver][giver])
+            {
+                count++;
+            }
+            else if (giftLog[giver][receiver] == giftLog[receiver][giver])
+            {
+                if (giftValue[giver] > giftValue[receiver])
+                {
+                    count++;
+                }
+            }
+
+        }
+        if (max < count)
+        {
+            max = count;
+        }
+    }
+
+    return max;
 }
